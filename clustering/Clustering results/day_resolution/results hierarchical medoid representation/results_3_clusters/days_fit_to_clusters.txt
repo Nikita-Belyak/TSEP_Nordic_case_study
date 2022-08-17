@@ -1,0 +1,15 @@
+wind-DEN: cluster_1_fit_index = 354, cluster_2_fit_index = 257, cluster_3_fit_index = 204
+solar-NOR: cluster_1_fit_index = 6, cluster_2_fit_index = 77, cluster_3_fit_index = 210
+solar-SWE: cluster_1_fit_index = 6, cluster_2_fit_index = 91, cluster_3_fit_index = 159
+el_demand-SWE: cluster_1_fit_index = 12, cluster_2_fit_index = 257, cluster_3_fit_index = 204
+el_demand-DEN: cluster_1_fit_index = 12, cluster_2_fit_index = 257, cluster_3_fit_index = 204
+solar-FIN: cluster_1_fit_index = 12, cluster_2_fit_index = 257, cluster_3_fit_index = 200
+wind-NOR: cluster_1_fit_index = 12, cluster_2_fit_index = 257, cluster_3_fit_index = 204
+solar-DEN: cluster_1_fit_index = 313, cluster_2_fit_index = 104, cluster_3_fit_index = 200
+el_demand-BAL: cluster_1_fit_index = 26, cluster_2_fit_index = 267, cluster_3_fit_index = 190
+wind-BAL: cluster_1_fit_index = 88, cluster_2_fit_index = 258, cluster_3_fit_index = 141
+el_demand-NOR: cluster_1_fit_index = 12, cluster_2_fit_index = 257, cluster_3_fit_index = 204
+el_demand-FIN: cluster_1_fit_index = 43, cluster_2_fit_index = 263, cluster_3_fit_index = 177
+solar-BAL: cluster_1_fit_index = 323, cluster_2_fit_index = 89, cluster_3_fit_index = 150
+wind-FIN: cluster_1_fit_index = 12, cluster_2_fit_index = 257, cluster_3_fit_index = 204
+wind-SWE: cluster_1_fit_index = 10, cluster_2_fit_index = 320, cluster_3_fit_index = 199

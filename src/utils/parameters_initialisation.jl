@@ -33,38 +33,19 @@ I = collect(skipmissing(DataFrame(CSV.File(data_src_link  * "/sets.csv"))[!,7]))
 N_I = length(I)
 
 
-# variable correspondent to the representative week number if each scenario
+# variable correspondent to the representative weeks number for each scenario
 # that is used to define the characterisitcs of the scenario 
-representative_week = 2
+representative_weeks = collect(skipmissing(DataFrame(CSV.File(data_src_link  * "/sets.csv"))[!,2]))
 
 
 ## Demand 
 
+# Hours allocated to each scenaro
+#hours_for_each_scenario = hours_for_each_scenario_generation(representative_weeks)
 
+## Demand
 # Slope and the intercept of the inverse demand functoion
-#id_slope, id_intercept = lif_slope_and_intercept_generation(data_src_link, N_nodes, N_scen, T, hours_for_each_scenario, scaling_factor)
-epsilon = -0.3 # demand elasticity 
-id_slope = Array{Float64}(undef, N_scen, N_T, N_nodes) 
-id_intercept = Array{Float64}(undef, N_scen, N_T, N_nodes) 
-for n = 1:N_nodes 
-    node_data = (Matrix(DataFrame(CSV.File(data_src_link * "/inverse_demand/" * "demand_and_prices_" * string(n) * ".csv"))[!,2:3]))
-    for s = 1:N_scen
-        @show sum(S_T[1:s])-S_T[s]+1
-        scenario_data = node_data[sum(S_T[1:s])-S_T[s]+1 : sum(S_T[1:s]), :]
-        @show scenario_data[:, 1]
-        @show scenario_data[:, 2]
-        for t = 1:N_T
-            id_slope[s,t,n] = - round(scenario_data[t, 2] * 1 / (epsilon * scenario_data[t, 1]), digits = 4)
-            id_intercept[s,t,n] =  round(scenario_data[t, 2] * 1 + id_slope[s,t,n] * scenario_data[t, 1], digits = 4)
-
-            #id_slope[s,t,n] = id_slope[s,t,n]/T[t]
-            #id_intercept[s,t,n] = id_intercept[s,t,n]/T[t]
-
-        end
-    end
-end
-#id_slope =  id_slope.*1000
-#id_intercept = id_intercept.*1000
+id_slope, id_intercept = lif_slope_and_intercept_generation(data_src_link, N_nodes, N_scen, T, scaling_factor)
 
 ## Transmission lines parameters 
 
@@ -91,7 +72,8 @@ I_lines = equivalent_annual_cost.(float.(Costs_lines .* Distance_lines .+ Conver
 I_lines = replace(I_lines, NaN=>0)
 
 I_lines = round.(I_lines,digits = 4)
-#I_lines = I_lines./100
+# levelising for 1 day
+I_lines = I_lines./365
 
 #scalling
 #I_lines = I_lines./scaling_factor
@@ -99,6 +81,13 @@ I_lines = round.(I_lines,digits = 4)
 
 # Budget limits (considering the expansion for each line) 
 B_lines = Matrix(DataFrame(CSV.File(data_src_link * "/transmission_lines/" * "budget_limits.csv"))[!,:])[1]
+
+# if we use small-large concept for the inout values
+if input_set.transm_budget == "small"
+    B_lines = EXP_TRANSM_BUDGET[1]
+elseif input_set.transm_budget == "large"
+    B_lines = EXP_TRANSM_BUDGET[2]
+end
 
 #scalling
 #B_lines = B_lines./scaling_factor
@@ -108,14 +97,21 @@ B_lines = Matrix(DataFrame(CSV.File(data_src_link * "/transmission_lines/" * "bu
 M_lines = Matrix(DataFrame(CSV.File(data_src_link * "/transmission_lines/" * "lines_maintenance_costs.csv"))[!,:]) .* I_lines
 #scalling
 M_lines = M_lines./scaling_factor
-#levelising for 2 months 
-M_lines = M_lines./6
-#TRANSM = transmission_parameters(round.(L_max, digits = max_digits), round.(M_lines, digits = max_digits), round.(I_lines, digits = max_digits), round.(B_lines, digits = max_digits))
-TRANSM = transmission_parameters(L_max, M_lines, I_lines, B_lines)
+# levelising for 1 day
+M_lines = M_lines./365
+# TRANSM = transmission_parameters(round.(L_max, digits = max_digits), round.(M_lines, digits = max_digits), round.(I_lines, digits = max_digits), round.(B_lines, digits = max_digits))
+TRANSM = transmission_parameters(round.(L_max, digits = global_max_digits), round.(M_lines, digits = global_max_digits), round.(I_lines, digits = global_max_digits), round.(B_lines, digits = global_max_digits))
 
 
 ## Budget limits for generation expansion (for each producer)
 GEN_BUDGET = Array(DataFrame(CSV.File(data_src_link * "/generation_budget_limits/budget_limits.csv"))[!,1:N_I])
+
+# if we use small-large concept for the inout values
+if input_set.gen_budget == "small"
+    GEN_BUDGET = EXP_GEN_BUDGET[1]*ones(N_I)
+elseif input_set.gen_budget == "large"
+    GEN_BUDGET = EXP_GEN_BUDGET[2]*ones(N_I)
+end
 
 ## Conventional generation
 
@@ -130,11 +126,11 @@ end
 # Maintenace costs at each node for conventional units 
 M_conv = Array{Float64}(undef, N_nodes, N_I, N_E )
 for i in 1:N_I
-    M_conv[:,i,:] = Matrix(DataFrame(CSV.File(data_src_link * "/conventional_generation_units/fixed_maintenance_costs/" * "fixed_maintenance_costs_producer_"* string(i)* ".csv"))[!,2:N_E+1]) .* 1000
+    M_conv[:,i,:] = Matrix(DataFrame(CSV.File(data_src_link * "/conventional_generation_units/fixed_maintenance_costs/" * "fixed_maintenance_costs_producer_"* string(i)* ".csv"))[!,2:N_E+1])
 end
 
-#levelising for 2 months 
-M_conv = M_conv./6
+#levelising for 1 day
+M_conv = M_conv./365
 @show M_conv
 #scalling
 #M_conv = M_conv./scaling_factor
@@ -179,9 +175,13 @@ end
 
 # Annualised investment costs at each node for conventional units 
 I_conv= Array{Float64}(undef, N_nodes, N_I, N_E )
-I_conv = equivalent_annual_cost.(Investment_conv .* 1000, Lifetime_conv*6, interest_rate) 
+I_conv = equivalent_annual_cost.(Investment_conv, Lifetime_conv*6, interest_rate) 
 
 I_conv = round.(I_conv, digits = 4)
+
+# levelising for 1 day
+I_conv = I_conv./365
+
 #scalling 
 #I_conv = I_conv./scaling_factor
 
@@ -203,11 +203,19 @@ end
 
 # Carbon tax for conventional units 
 CO2_tax = Matrix(DataFrame(CSV.File(data_src_link * "/conventional_generation_units/" * "carbon_tax.csv"))[!,2:N_E+1])
+
+# if we use small-large concept for the inout values
+if input_set.tax == "small"
+   CO2_tax = repeat(EXP_INPUT_TAX[1], N_nodes)
+elseif input_set.tax == "large"
+    CO2_tax = repeat(EXP_INPUT_TAX[2], N_nodes)
+end
+
 #CO2_tax = CO2_tax .* 10
 #scalling 
 #CO2_tax = CO2_tax./scaling_factor
 #CONV = conventional_generation_parameters(round.(G_max_E, digits = max_digits), round.(M_conv, digits = max_digits), round.(I_conv, digits = max_digits), round.(B_conv, digits = max_digits), round.(C_conv, digits = max_digits), round.(R_up_conv, digits = max_digits), round.(R_down_conv, digits = max_digits), round.(CO2_tax, digits = max_digits))
-CONV = conventional_generation_parameters(G_max_E, M_conv, I_conv, C_conv, R_up_conv, R_down_conv, CO2_tax)
+CONV = conventional_generation_parameters( round.(G_max_E, digits = global_max_digits), round.(M_conv,  digits = global_max_digits), round.(I_conv,  digits = global_max_digits), round.(C_conv, digits = global_max_digits), R_up_conv, R_down_conv, CO2_tax )
 
 ## VRES generation
 
@@ -220,11 +228,11 @@ end
 # Maintenace costs at each node for VRES
 M_VRES = Array{Float64}(undef, N_nodes, N_I, N_R )
 for i in 1:N_I
-    M_VRES[:,i,:] = Matrix(DataFrame(CSV.File(data_src_link * "/VRES_generation_units/maintenance_costs/" * "maintenance_costs_producer_"* string(i)* ".csv"))[!,2:N_R+1]) .* 1000
+    M_VRES[:,i,:] = Matrix(DataFrame(CSV.File(data_src_link * "/VRES_generation_units/maintenance_costs/" * "maintenance_costs_producer_"* string(i)* ".csv"))[!,2:N_R+1])
 end
 
-# Levelising for 2 months
-M_VRES = M_VRES./6
+# Levelising for 1 day
+M_VRES = M_VRES./365
 @show M_VRES
 
 #reading the data about vres investemnt costs incentives
@@ -252,40 +260,58 @@ end
 
 # Annualised investment costs at each node for VRES units 
 I_VRES= Array{Float64}(undef, N_nodes, N_I, N_R )
-I_VRES = equivalent_annual_cost.(Investment_VRES .* 1000, Lifetime_VRES*6, interest_rate) 
+I_VRES = equivalent_annual_cost.(Investment_VRES, Lifetime_VRES*6, interest_rate) 
 #scalling 
 #I_VRES = I_VRES./scaling_factor
 
 I_VRES = round.(I_VRES, digits = 4)
 
+# levelising for 1 day
+I_VRES = I_VRES./365
+
 #reading the data about vres investemnt costs incentives
 incentives = Array(DataFrame(CSV.File(data_src_link * "/VRES_generation_units/incentives.csv"))[!,2])
+
+# if we use small-large concept for the inout values
+if input_set.incentive == "small"
+    incentives = EXP_INC[1]*ones(N_nodes)
+elseif input_set.incentive == "large"
+    incentives = EXP_INC[2]*ones(N_nodes)
+end
+
 for n = 1:N_nodes
     I_VRES[n,:,:] = I_VRES[n,:,:].*(1-incentives[n]/100)
 end
 
-@show I_VRES
 # Availability factor 
 # create a structure to keep the availability factor values
 A_VRES = Array{Float64}(undef, N_scen, N_T, N_nodes, N_R)
 #A_VRES = availability_factor_generation(data_src_link, N_nodes, N_scen, T, N_R, hours_for_each_scenario)
-for n = 1:N_nodes 
-    node_data = Matrix(DataFrame(CSV.File(data_src_link * "/VRES_generation_units/availability_factor/" * "hourly_data_node_$n.csv"))[!,2:end])
-    for s = 1:N_scen
-        @show sum(S_T[1:s])-S_T[s]+1
-        scenario_data = node_data[sum(S_T[1:s])-S_T[s]+1 : sum(S_T[1:s]), :]
-        for t = 1:N_T
-            for r in 1:N_R
-                A_VRES[s,t,n,r] = scenario_data[t,r]
-            end
-        end
-    end
-end
+# Availability factor 
+A_VRES = availability_factor_generation(data_src_link, N_nodes, N_scen, T, N_R)
 #scaling
 #A_VRES = A_VRES./scaling_factor
 
 
 #VRES =  VRES_parameters(round.(G_max_VRES, digits = max_digits), round.(M_VRES,digits = max_digits), round.(I_VRES, digits = max_digits), round.(B_VRES, digits = max_digits), round.(A_VRES, digits = max_digits))
-VRES =  VRES_parameters(G_max_VRES, M_VRES, I_VRES, A_VRES)
+VRES =  VRES_parameters(round.(G_max_VRES, digits = global_max_digits), round.(M_VRES, digits = global_max_digits), round.(I_VRES, digits = global_max_digits), A_VRES)
 
-input_parameters = initial_parameters(N_scen, N_nodes, N_T, N_R, N_E, N_I, S_prob, T, id_slope, id_intercept, GEN_BUDGET, VRES, CONV, TRANSM)
+# Hydro power 
+
+#reading the data about total available hydro power
+hydro_total = Array{Float64}(undef, N_nodes, N_I)
+for i = 1:N_I
+    hydro_total[:,i] =  Array(DataFrame(CSV.File(data_src_link * "/hydro_power/installed_generation_capacities_producer_$i.csv"))[!,2])
+end
+
+HYDRO = Array{Float64}(undef, N_scen, N_T, N_nodes, N_I)
+
+for s = 1:N_scen
+    for t = 1:N_T
+        for i = 1:N_I
+            HYDRO[s,t,:,i] = round.( hydro_total[:,i] ./ 365 .* (T[t]/168), digits = global_max_digits)
+        end
+    end
+end
+
+input_parameters = initial_parameters(N_scen, N_nodes, N_T, N_R, N_E, N_I, S_prob, T, id_slope, id_intercept, GEN_BUDGET, VRES, CONV, HYDRO, TRANSM)

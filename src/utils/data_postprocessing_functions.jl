@@ -17,7 +17,7 @@ Arguments of the function:
 """
 
 
-function print_output(src_link::String, ip::initial_parameters, ob_val::Float64, l_plus::Array{Float64}, g_VRES_plus::Array{Float64}, g_conv_plus::Array{Float64}, g_VRES::Array{Float64}, g_conv::Array{Float64}, f::Array{Float64}, q::Array{Float64}, incentives::Array{Float64}, gen_budget::Array{Float64}, model::String, sf::Float64)
+function print_output(src_link::String, ip::initial_parameters, ob_val::Float64, l_plus::Matrix{Float64}, g_VRES_plus::Array{Float64}, g_conv_plus::Array{Float64}, g_VRES::Array{Float64}, g_conv::Array{Float64}, f::Array{Float64}, q::Array{Float64}, incentives::Any, gen_budget::Any, model::String, sf::Float64)
     
     #rounding all the values 
     round_digits = 3
@@ -322,6 +322,8 @@ function print_output(src_link::String, ip::initial_parameters, ob_val::Float64,
 
 
     close(io)
+
+    return ob_val, sum(vres_share[:].*ip.scen_prob), sum(total_consump[:].*ip.scen_prob)
 end
 
 # function to calculate the duality gap for the lower-level problem

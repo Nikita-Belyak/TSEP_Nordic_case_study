@@ -1,0 +1,45 @@
+
+Gurobi 9.5.0 (mac64[x86]) logging started Tue  2 Aug 11:24:00 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/02_Aug_2022_11_24_00.log"
+Set parameter Threads to value 6
+
+Gurobi 9.5.0 (mac64[x86]) logging started Tue  2 Aug 11:24:01 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/02_Aug_2022_11_24_00.log"
+
+Gurobi 9.5.0 (mac64[x86]) logging started Tue  2 Aug 11:24:01 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/02_Aug_2022_11_24_00.log"
+Gurobi Optimizer version 9.5.0 build v9.5.0rc5 (mac64[x86])
+Thread count: 6 physical cores, 12 logical processors, using up to 6 threads
+Optimize a model with 28361 rows, 22055 columns and 83325 nonzeros
+Model fingerprint: 0x2efd4216
+Model has 60 quadratic objective terms
+Variable types: 12790 continuous, 9265 integer (9265 binary)
+Coefficient statistics:
+  Matrix range     [3e-04, 7e+10]
+  Objective range  [7e+00, 8e+03]
+  QObjective range [3e-04, 2e-01]
+  Bounds range     [3e-312, 9e+03]
+  RHS range        [1e-03, 1e+10]
+Warning: Model contains large matrix coefficient range
+Warning: Model contains large rhs
+         Consider reformulating model or setting NumericFocus parameter
+         to avoid numerical issues.
+
+User MIP start did not produce a new incumbent solution
+User MIP start violates constraint R4167 by 2773.500000000
+
+Presolve removed 185 rows and 515 columns
+Presolve time: 0.01s
+
+Explored 0 nodes (0 simplex iterations) in 0.05 seconds (0.02 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 0
+
+Model is infeasible or unbounded
+Best objective -, best bound -, gap -
+
+User-callback calls 62, time in user-callback 0.00 sec

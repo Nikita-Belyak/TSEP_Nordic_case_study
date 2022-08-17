@@ -42,6 +42,7 @@ mutable struct conventional_generation_parameters
     CO2_tax::Array{Float64}
 end
 
+
 """
 transmission_parameters
 Stores energy transmission realted parameters. Has the following fields:
@@ -76,6 +77,7 @@ Stores attributes for generating JuMP model. Has the following fields:
 * gen_budget::Array{Float64}                        Generation expansion budget defined for each GenCo
 * vres::VRES_parameters                             VRES related parameters
 * conv::conventional_generation_parameters          Conventional generation related parameters 
+* hydro::Array{Float64}                             Hydro power installed capacity defined for each producer, node, time period and scenario
 * transm::transmission_parameters                   Transmission lines related paramters
 
 """
@@ -106,6 +108,9 @@ mutable struct initial_parameters
 
     # Conventional generation parameters
     conv::conventional_generation_parameters 
+
+    # hydro parameters
+    hydro::Array{Float64}
 
     # Transmission related parameters
     transm::transmission_parameters

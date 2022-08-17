@@ -1,0 +1,99 @@
+
+Gurobi 9.5.0 (mac64[x86]) logging started Wed 20 Jul 16:59:04 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/20_Jul_2022_16_59_03.log"
+Set parameter Threads to value 6
+Set parameter MIPFocus to value 3
+
+Gurobi 9.5.0 (mac64[x86]) logging started Wed 20 Jul 16:59:13 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/20_Jul_2022_16_59_03.log"
+
+Gurobi 9.5.0 (mac64[x86]) logging started Wed 20 Jul 16:59:20 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/20_Jul_2022_16_59_03.log"
+Gurobi Optimizer version 9.5.0 build v9.5.0rc5 (mac64[x86])
+Thread count: 6 physical cores, 12 logical processors, using up to 6 threads
+Optimize a model with 20806 rows, 23875 columns and 73965 nonzeros
+Model fingerprint: 0xf2334722
+Model has 70 quadratic objective terms
+Model has 10075 SOS constraints
+Variable types: 23875 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-04, 5e+03]
+  Objective range  [1e+01, 1e+04]
+  QObjective range [1e-04, 7e-02]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [8e-01, 1e+06]
+Presolve removed 10843 rows and 7058 columns
+Presolve time: 0.21s
+Presolved: 9963 rows, 16817 columns, 47187 nonzeros
+Presolved model has 8325 SOS constraint(s)
+Presolved model has 70 quadratic objective terms
+Variable types: 16817 continuous, 0 integer (0 binary)
+Root relaxation presolve removed 3668 rows and 11854 columns
+Root relaxation presolved: 6295 rows, 4963 columns, 21856 nonzeros
+Root relaxation presolved model has 70 quadratic objective terms
+
+
+Root relaxation: objective 7.344522e+09, 3444 iterations, 0.13 seconds (0.09 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 7.3445e+09    0  135          - 7.3445e+09      -     -    0s
+     0     0 7.3439e+09    0  135          - 7.3439e+09      -     -    0s
+     0     2 7.3439e+09    0  135          - 7.3439e+09      -     -    0s
+   803  1111 7.3438e+09    9  135          - 7.3438e+09      -  55.1    5s
+  1704  1828 7.3438e+09   27  153          - 7.3438e+09      -  53.7   10s
+  3012  2700 7.3438e+09   46  167          - 7.3438e+09      -  43.0   15s
+  4133  3470 7.3381e+09   66  176          - 7.3438e+09      -  40.5   20s
+  5454  4317 7.3417e+09   31  171          - 7.3438e+09      -  38.9   26s
+  6393  5023 7.3438e+09   46  171          - 7.3438e+09      -  38.3   30s
+  7836  6292 7.3417e+09   28  171          - 7.3438e+09      -  38.5   36s
+  8945  7205 7.3438e+09   49  172          - 7.3438e+09      -  38.8   42s
+ 10076  8188 7.3438e+09   49  178          - 7.3438e+09      -  39.1   47s
+ 10693  8783 7.3438e+09   43  170          - 7.3438e+09      -  39.1   50s
+ 12103  9988 7.3437e+09   45  180          - 7.3438e+09      -  38.8   55s
+ 13582 11257 7.3438e+09   46  162          - 7.3438e+09      -  38.7   61s
+ 15215 12579 7.3438e+09   43  176          - 7.3438e+09      -  38.6   67s
+ 16056 13259 7.3381e+09   65  178          - 7.3438e+09      -  38.7   70s
+ 17794 14621 7.3435e+09   28  172          - 7.3438e+09      -  38.8   76s
+ 18678 15335 7.3381e+09   63  169          - 7.3438e+09      -  38.9   80s
+ 20582 16876 7.3381e+09   64  176          - 7.3438e+09      -  38.5   88s
+ 21529 17511 7.0542e+09   70  175          - 7.3438e+09      -  38.4   91s
+ 23210 18988 7.3392e+09   63  171          - 7.3438e+09      -  38.9   98s
+ 24187 19745 7.3438e+09   46  171          - 7.3438e+09      -  38.6  101s
+ 25102 20390 7.3381e+09   63  172          - 7.3438e+09      -  38.5  105s
+ 26929 21823 7.3438e+09   49  170          - 7.3438e+09      -  38.6  112s
+ 27850 22603 7.3438e+09   47  181          - 7.3438e+09      -  38.6  116s
+ 28776 23348 7.3438e+09   45  164          - 7.3438e+09      -  38.5  120s
+ 30672 24942 7.3438e+09   44  177          - 7.3438e+09      -  38.4  127s
+ 31665 25641 7.3381e+09   64  179          - 7.3438e+09      -  38.2  130s
+ 32586 26358 7.3438e+09   47  168          - 7.3438e+09      -  38.3  135s
+ 34463 27825 7.3438e+09   41  177          - 7.3438e+09      -  38.2  144s
+ 35372 28578 7.3438e+09   68  174          - 7.3438e+09      -  38.2  148s
+ 36309 29383 7.3438e+09   30  175          - 7.3438e+09      -  38.2  152s
+ 37262 30152 7.3438e+09   47  182          - 7.3438e+09      -  38.2  156s
+ 38215 30928 7.3438e+09   33  178          - 7.3438e+09      -  38.1  160s
+ 40104 32424 7.3438e+09   43  177          - 7.3438e+09      -  38.0  167s
+ 40987 33124 7.3381e+09   64  175          - 7.3438e+09      -  38.0  170s
+ 41875 33793 7.3438e+09   51  174          - 7.3438e+09      -  38.1  175s
+ 43746 35367 7.3438e+09   49  169          - 7.3438e+09      -  38.0  183s
+ 44736 36176 7.3438e+09   30  172          - 7.3438e+09      -  37.9  188s
+ 45725 36864 7.3437e+09   46  177          - 7.3438e+09      -  37.8  192s
+ 46649 37559 7.3437e+09   45  177          - 7.3438e+09      -  37.8  195s
+ 48401 39022 7.3438e+09   48  173          - 7.3438e+09      -  37.7  202s
+ 49341 39688 7.3438e+09   51  175          - 7.3438e+09      -  37.7  206s
+ 51122 41147 7.3438e+09   48  169          - 7.3438e+09      -  37.7  213s
+ 52048 41901 7.3438e+09   45  176          - 7.3438e+09      -  37.6  216s
+ 52970 42616 7.3438e+09   49  175          - 7.3438e+09      -  37.6  220s
+ 54727 44052 7.3381e+09   64  178          - 7.3438e+09      -  37.7  227s
+ 55637 44730 7.3432e+09   52  178          - 7.3438e+09      -  37.7  231s
+ 56527 45450 7.3438e+09   49  175          - 7.3438e+09      -  37.7  235s
+ 58278 46816 7.3438e+09   47  166          - 7.3438e+09      -  37.8  242s
+ 59237 47585 7.3437e+09   43  174          - 7.3438e+09      -  37.8  246s
+ 60164 48263 7.3438e+09   44  166          - 7.3438e+09      -  37.7  250s
+ 61970 49715 7.3437e+09   31  179          - 7.3438e+09      -  37.8  256s
+ 62882 50422 7.3438e+09   47  175          - 7.3438e+09      -  37.8  261s
+ 64682 51790 7.3381e+09   64  175          - 7.3438e+09      -  37.8  267s

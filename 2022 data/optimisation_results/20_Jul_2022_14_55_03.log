@@ -1,0 +1,24 @@
+
+Gurobi 9.0.0 (mac64) logging started Wed Jul 20 14:55:03 2022
+
+
+Gurobi 9.0.0 (mac64) logging started Wed Jul 20 14:55:10 2022
+
+
+Gurobi 9.0.0 (mac64) logging started Wed Jul 20 14:55:19 2022
+
+Gurobi Optimizer version 9.0.0 build v9.0.0rc2 (mac64)
+Optimize a model with 11431 rows, 11430 columns and 41950 nonzeros
+Model fingerprint: 0x8eb1e19d
+Model has 70 quadratic objective terms
+Model has 2 quadratic constraints
+Coefficient statistics:
+  Matrix range     [1e-04, 5e+03]
+  QMatrix range    [1e-04, 2e+01]
+  QLMatrix range   [2e-02, 1e+06]
+  Objective range  [1e+01, 1e+04]
+  QObjective range [1e-04, 7e-02]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-02, 1e+06]
+  QRHS range       [1e-02, 1e-02]
+Presolve removed 1735 rows and 1200 columns

@@ -1,0 +1,86 @@
+
+Gurobi 9.5.0 (mac64[x86]) logging started Wed 20 Jul 16:31:02 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/20_Jul_2022_16_31_02.log"
+Set parameter Threads to value 6
+Set parameter MIPFocus to value 3
+
+Gurobi 9.5.0 (mac64[x86]) logging started Wed 20 Jul 16:31:10 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/20_Jul_2022_16_31_02.log"
+
+Gurobi 9.5.0 (mac64[x86]) logging started Wed 20 Jul 16:31:14 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/20_Jul_2022_16_31_02.log"
+Gurobi Optimizer version 9.5.0 build v9.5.0rc5 (mac64[x86])
+Thread count: 6 physical cores, 12 logical processors, using up to 6 threads
+Optimize a model with 20806 rows, 23875 columns and 73965 nonzeros
+Model fingerprint: 0xf2334722
+Model has 70 quadratic objective terms
+Model has 10075 SOS constraints
+Variable types: 23875 continuous, 0 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-04, 5e+03]
+  Objective range  [1e+01, 1e+04]
+  QObjective range [1e-04, 7e-02]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [8e-01, 1e+06]
+Presolve removed 10843 rows and 7058 columns
+Presolve time: 0.21s
+Presolved: 9963 rows, 16817 columns, 47187 nonzeros
+Presolved model has 8325 SOS constraint(s)
+Presolved model has 70 quadratic objective terms
+Variable types: 16817 continuous, 0 integer (0 binary)
+Root relaxation presolve removed 3668 rows and 11854 columns
+Root relaxation presolved: 6295 rows, 4963 columns, 21856 nonzeros
+Root relaxation presolved model has 70 quadratic objective terms
+
+
+Root relaxation: objective 7.344522e+09, 3444 iterations, 0.18 seconds (0.09 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 7.3445e+09    0  135          - 7.3445e+09      -     -    0s
+     0     0 7.3439e+09    0  135          - 7.3439e+09      -     -    0s
+     0     2 7.3439e+09    0  135          - 7.3439e+09      -     -    0s
+   501   796 7.3438e+09   10  135          - 7.3438e+09      -  56.4    5s
+  1500  1492 7.3420e+09   25    0          - 7.3438e+09      -  52.8   10s
+  2272  2335 7.3438e+09   30  166          - 7.3438e+09      -  47.7   16s
+  3309  2993 7.3438e+09   37  165          - 7.3438e+09      -  43.3   20s
+  4974  4015 7.3426e+09   24  167          - 7.3438e+09      -  39.5   26s
+  5944  4547 7.3438e+09   41  167          - 7.3438e+09      -  38.5   31s
+  6918  5433 7.3438e+09   50  170          - 7.3438e+09      -  37.9   36s
+  7836  6292 7.3417e+09   28  171          - 7.3438e+09      -  38.5   40s
+  9504  7673 7.3432e+09   48  167          - 7.3438e+09      -  38.9   46s
+ 10693  8783 7.3438e+09   43  170          - 7.3438e+09      -  39.1   52s
+ 11388  9384 7.3381e+09   63  172          - 7.3438e+09      -  38.8   55s
+ 12787 10623 7.3438e+09   37  165          - 7.3438e+09      -  38.8   61s
+ 14366 11920 7.0542e+09   71  175          - 7.3438e+09      -  38.7   67s
+ 15215 12579 7.3438e+09   43  176          - 7.3438e+09      -  38.6   71s
+ 16056 13259 7.3381e+09   65  178          - 7.3438e+09      -  38.7   75s
+ 17794 14621 7.3435e+09   28  172          - 7.3438e+09      -  38.8   83s
+ 18678 15335 7.3381e+09   63  169          - 7.3438e+09      -  38.9   87s
+ 19610 16139 7.3438e+09   44  174          - 7.3438e+09      -  38.8   90s
+ 21529 17511 7.0542e+09   70  175          - 7.3438e+09      -  38.4   97s
+ 22324 18187 7.3436e+09   48  186          - 7.3438e+09      -  38.8  101s
+ 23210 18988 7.3392e+09   63  171          - 7.3438e+09      -  38.9  105s
+ 25102 20390 7.3381e+09   63  172          - 7.3438e+09      -  38.5  113s
+ 25989 21112 7.3438e+09   43  181          - 7.3438e+09      -  38.7  117s
+ 26929 21823 7.3438e+09   49  170          - 7.3438e+09      -  38.6  121s
+ 27850 22603 7.3438e+09   47  181          - 7.3438e+09      -  38.6  125s
+ 29707 24109 7.3438e+09   48  176          - 7.3438e+09      -  38.5  133s
+ 30672 24942 7.3438e+09   44  177          - 7.3438e+09      -  38.4  137s
+ 31665 25641 7.3381e+09   64  179          - 7.3438e+09      -  38.2  141s
+ 32586 26358 7.3438e+09   47  168          - 7.3438e+09      -  38.3  145s
+ 34463 27825 7.3438e+09   41  177          - 7.3438e+09      -  38.2  152s
+ 35372 28578 7.3438e+09   68  174          - 7.3438e+09      -  38.2  155s
+ 37262 30152 7.3438e+09   47  182          - 7.3438e+09      -  38.2  163s
+ 38215 30928 7.3438e+09   33  178          - 7.3438e+09      -  38.1  167s
+ 39151 31675 7.3437e+09   43  179          - 7.3438e+09      -  38.0  170s
+ 40987 33124 7.3381e+09   64  175          - 7.3438e+09      -  38.0  177s
+ 41875 33793 7.3438e+09   51  174          - 7.3438e+09      -  38.1  180s
+ 43746 35367 7.3438e+09   49  169          - 7.3438e+09      -  38.0  188s
+ 44736 36176 7.3438e+09   30  172          - 7.3438e+09      -  37.9  191s
+ 45725 36864 7.3437e+09   46  177          - 7.3438e+09      -  37.8  195s
+ 47544 38260 7.3438e+09   47  170          - 7.3438e+09      -  37.7  202s

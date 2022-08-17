@@ -1,0 +1,88 @@
+
+Gurobi 9.5.0 (mac64[x86]) logging started Wed 20 Jul 20:24:15 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/20_Jul_2022_20_24_15.log"
+Set parameter Threads to value 6
+Set parameter MIPFocus to value 3
+
+Gurobi 9.5.0 (mac64[x86]) logging started Wed 20 Jul 20:24:17 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/20_Jul_2022_20_24_15.log"
+
+Gurobi 9.5.0 (mac64[x86]) logging started Wed 20 Jul 20:24:17 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/20_Jul_2022_20_24_15.log"
+Gurobi Optimizer version 9.5.0 build v9.5.0rc5 (mac64[x86])
+Thread count: 6 physical cores, 12 logical processors, using up to 6 threads
+Optimize a model with 32981 rows, 25625 columns and 98385 nonzeros
+Model fingerprint: 0xea1022a6
+Model has 70 quadratic objective terms
+Variable types: 14850 continuous, 10775 integer (10775 binary)
+Coefficient statistics:
+  Matrix range     [1e-04, 1e+16]
+  Objective range  [1e+01, 1e+04]
+  QObjective range [1e-04, 7e-02]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-02, 1e+16]
+Warning: Model contains large matrix coefficient range
+Warning: Model contains large rhs
+         Consider reformulating model or setting NumericFocus parameter
+         to avoid numerical issues.
+
+User MIP start did not produce a new incumbent solution
+User MIP start violates constraint R4369 by 6705.600000000
+
+Presolve removed 8754 rows and 6973 columns
+Presolve time: 0.57s
+Presolved: 24227 rows, 18652 columns, 78281 nonzeros
+Presolved model has 70 quadratic objective terms
+Variable types: 10442 continuous, 8210 integer (8210 binary)
+Root relaxation presolve removed 2138 rows and 2138 columns
+Root relaxation presolved: 22089 rows, 16514 columns, 74007 nonzeros
+Root relaxation presolved model has 70 quadratic objective terms
+
+Extra simplex iterations after uncrush: 244
+
+Root relaxation: objective 6.366702e+09, 30092 iterations, 1.82 seconds (1.33 work units)
+Another try with MIP start
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 6.3667e+09    0  622          - 6.3667e+09      -     -    2s
+     0     0 6.3663e+09    0  265          - 6.3663e+09      -     -    3s
+     0     0 6.3663e+09    0  182          - 6.3663e+09      -     -    3s
+     0     0 6.3663e+09    0  178          - 6.3663e+09      -     -    4s
+     0     0 6.3663e+09    0  177          - 6.3663e+09      -     -    4s
+     0     0 6.3662e+09    0  173          - 6.3662e+09      -     -    5s
+     0     0 6.3662e+09    0  169          - 6.3662e+09      -     -    5s
+     0     0 6.3589e+09    0  203          - 6.3589e+09      -     -    6s
+     0     0 6.3589e+09    0  201          - 6.3589e+09      -     -    7s
+     0     0 6.3589e+09    0  187          - 6.3589e+09      -     -    8s
+     0     0 6.3589e+09    0  191          - 6.3589e+09      -     -    8s
+     0     0 6.3580e+09    0  189          - 6.3580e+09      -     -    9s
+     0     0 6.3580e+09    0  185          - 6.3580e+09      -     -    9s
+     0     0 6.3580e+09    0  193          - 6.3580e+09      -     -   10s
+Model proven infeasible by zero objective heuristic
+
+Cutting planes:
+  Learned: 34
+  Gomory: 28
+  Cover: 31
+  Implied bound: 204
+  Clique: 46
+  MIR: 247
+  Flow cover: 562
+  Network: 1
+  RLT: 2
+  Relax-and-lift: 228
+
+Explored 1 nodes (35544 simplex iterations) in 13.44 seconds (9.01 work units)
+Thread count was 6 (of 12 available processors)
+
+Solution count 0
+
+Model is infeasible or unbounded
+Best objective -, best bound 6.358006738087e+09, gap -
+
+User-callback calls 4667, time in user-callback 0.01 sec

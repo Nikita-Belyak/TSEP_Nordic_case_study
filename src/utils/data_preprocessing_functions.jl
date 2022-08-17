@@ -13,23 +13,24 @@ end
 
 """
 Function hours_for_each_scenario_generation generates the hour-strating and ending value for each of the scenarios
-based on the week number send as an input and the set containg the info on the number of days considered in each scenario 
+based on the days number send as an input 
 
 Parameters:
-* days                          the array that contains the number of days considered in each scenario
-* week::Int                     the week number in the month to be considered for generating the scenario 
+* representative_days::Array{Int64}                  the representative days in the year to be considered for generating the scenario 
 """
 
-function hours_for_each_scenario_generation(days::Array{Int64}, week::Int64)
-    output = Array{UnitRange{Int64}}(undef,length(days))
-    for s = 1:length(days)
-        start_hour = sum(days[1:s-1])*24 + (week-1)*7*24
-        end_hour =  start_hour+24*7
-        output[s] = start_hour:end_hour
-    end
+function hours_for_each_scenario_generation(s::Int64, n::Int64, type::String; vres_sourse_type = 1 )
+    
+    output = Array{UnitRange{Int64}}(undef,1)
+    
+    if type == "demand"
+        output = ((EL_DEMAND_cluster[n][s] - 1) * 24 + 1) : (EL_DEMAND_cluster[n][s] * 24)
+    elseif type == "vres"
+        output = ((VRES_cluster[[n, (vres_sourse_type == 1 ? vres_sourse_type : 2)]][s] - 1) * 24 + 1) : (VRES_cluster[[n, (vres_sourse_type == 1 ? vres_sourse_type : 2)]][s] * 24)
+    end 
+
     return output
 end
-
 
 """
 Function lif_slope_and_intercept_generation generates the slope and intercept for the inverse demand function based on the input data. 
@@ -47,7 +48,7 @@ Parameters:
 
 """
 
-function lif_slope_and_intercept_generation(data_src_link::String, N_nodes::Int64, N_scen::Int64, T::Array{Int64}, hours_to_be_extracted::Array{UnitRange{Int64}}, sf::Float64)
+function lif_slope_and_intercept_generation(data_src_link::String, N_nodes::Int64, N_scen::Int64, T::Array{Int64}, sf::Float64)
 
     # accumulate the time periods
     T_accumulated = accumulate(+, T)
@@ -69,7 +70,10 @@ function lif_slope_and_intercept_generation(data_src_link::String, N_nodes::Int6
         for s in 1:N_scen
     
         # extract the hourly data that corresponds to the scenario under consideration
-        scenario_data = (node_data[hours_to_be_extracted[s], :])
+
+        hours_to_be_extracted = hours_for_each_scenario_generation(s, n, "demand")
+        scenario_data = (node_data[hours_to_be_extracted, :])
+
         @show typeof(scenario_data)
         if typeof(scenario_data) == Array{Any,2}
             #convert(Array{Float64}, scenario_data)
@@ -91,8 +95,8 @@ function lif_slope_and_intercept_generation(data_src_link::String, N_nodes::Int6
 
                 epsilon = -0.3 # demand elasticity 
                 @show scenario_data[time_period_indexes, 2]
-                id_slope[s,t,n] = -mean(scenario_data[time_period_indexes, 2]) * 1 / (epsilon * mean(scenario_data[time_period_indexes, 1]))
-                id_intercept[s,t,n] = mean(scenario_data[time_period_indexes, 2]) * 1+ id_slope[s,t,n] * mean(scenario_data[time_period_indexes, 1])
+                id_slope[s,t,n] = round(-mean(scenario_data[time_period_indexes, 2]) * 1 / (epsilon * mean(scenario_data[time_period_indexes, 1])), digits = global_max_digits)
+                id_intercept[s,t,n] = round( mean(scenario_data[time_period_indexes, 2]) * 1+ id_slope[s,t,n] * mean(scenario_data[time_period_indexes, 1]), digits =  global_max_digits)
             end
         end
     end
@@ -118,7 +122,7 @@ arameters:
 * hours_to_be_extracted         An array with the range of hours defined for each scenario 
 
 """
-function availability_factor_generation(data_src_link::String, N_nodes::Int64, N_scen::Int64, T::Array{Int64}, N_R::Int64, hours_to_be_extracted::Array{UnitRange{Int64}})
+function availability_factor_generation(data_src_link::String, N_nodes::Int64, N_scen::Int64, T::Array{Int64}, N_R::Int64)
     
     # accumulate the time periods
     T_accumulated = accumulate(+, T)
@@ -139,7 +143,8 @@ function availability_factor_generation(data_src_link::String, N_nodes::Int64, N
             for s in 1:N_scen
     
             # extract the hourly data that corresponds to the scenario under consideration
-            scenario_data = node_data[hours_to_be_extracted[s], r]
+            hours_to_be_extracted = hours_for_each_scenario_generation(s, n, "vres", vres_sourse_type = r)
+            scenario_data = node_data[hours_to_be_extracted, r]
         
                 for t = 1:N_T
 
@@ -148,7 +153,7 @@ function availability_factor_generation(data_src_link::String, N_nodes::Int64, N
 
                     # save the correspodent expected value calculated for hourly data on the availability of the 
                     # correspondent VRES
-                    A_VRES[s,t,n,r] = sum(scenario_data[time_period_indexes])/T[t]
+                    A_VRES[s,t,n,r] = round(sum(scenario_data[time_period_indexes])/T[t], digits = global_max_digits)
                 
                 end
             end
@@ -159,3 +164,12 @@ function availability_factor_generation(data_src_link::String, N_nodes::Int64, N
 
 end
 
+# VRES map for representative days depdening on the node and type of the vres
+# [NODE (FIN, SWE, NOR, DEN, BAL), TYPE OF SOURSE (SOLAR, WIND)] => [CLUSTER 1 DAY, CLUSTER 2 DAY, CLUSTER 3 DAY]
+VRES_cluster = Dict([4,2]=>[354, 257, 204], [3,1] => [6, 77, 210], [2, 1] => [6, 91, 159], [1,1] => [12, 257, 200], [3, 2] => [12, 257, 204],
+                     [4,1] => [313, 104, 200], [5,2] => [88, 258, 141], [5,1] => [323, 89, 150], [1, 2] => [12, 257, 204], [2,2] => [10, 320, 199]) 
+
+
+# EL DEMAND map for representative days depdening on the node and type 
+# NODE (FIN, SWE, NOR, DEN, BAL) => [CLUSTER 1 DAY, CLUSTER 2 DAY, CLUSTER 3 DAY]
+EL_DEMAND_cluster = Dict( 2 => [12, 257, 204], 4 => [12, 257, 204], 5 => [26, 267, 190], 3 => [12, 257, 204], 1 => [43, 263, 177])

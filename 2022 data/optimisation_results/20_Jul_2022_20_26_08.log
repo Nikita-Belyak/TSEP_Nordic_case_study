@@ -1,0 +1,74 @@
+
+Gurobi 9.5.0 (mac64[x86]) logging started Wed 20 Jul 20:26:08 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/20_Jul_2022_20_26_08.log"
+Set parameter Threads to value 6
+
+Gurobi 9.5.0 (mac64[x86]) logging started Wed 20 Jul 20:26:09 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/20_Jul_2022_20_26_08.log"
+
+Gurobi 9.5.0 (mac64[x86]) logging started Wed 20 Jul 20:26:09 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/20_Jul_2022_20_26_08.log"
+Gurobi Optimizer version 9.5.0 build v9.5.0rc5 (mac64[x86])
+Thread count: 6 physical cores, 12 logical processors, using up to 6 threads
+Optimize a model with 32981 rows, 25625 columns and 98385 nonzeros
+Model fingerprint: 0x896eac07
+Model has 70 quadratic objective terms
+Variable types: 14850 continuous, 10775 integer (10775 binary)
+Coefficient statistics:
+  Matrix range     [1e-04, 3e+11]
+  Objective range  [1e+01, 1e+04]
+  QObjective range [1e-04, 7e-02]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-02, 1e+10]
+Warning: Model contains large matrix coefficient range
+Warning: Model contains large rhs
+         Consider reformulating model or setting NumericFocus parameter
+         to avoid numerical issues.
+
+User MIP start did not produce a new incumbent solution
+User MIP start violates constraint R4369 by 6705.600000000
+
+Presolve removed 8689 rows and 6934 columns
+Presolve time: 0.48s
+Presolved: 24292 rows, 18691 columns, 78385 nonzeros
+Presolved model has 70 quadratic objective terms
+Variable types: 10463 continuous, 8228 integer (8228 binary)
+
+Root relaxation: objective 6.375157e+09, 10805 iterations, 0.53 seconds (0.66 work units)
+Another try with MIP start
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 6.3752e+09    0  650          - 6.3752e+09      -     -    1s
+     0     0 6.3743e+09    0  230          - 6.3743e+09      -     -    6s
+     0     0 6.3743e+09    0  210          - 6.3743e+09      -     -    6s
+     0     0 6.3625e+09    0  206          - 6.3625e+09      -     -    6s
+     0     0 6.3625e+09    0  202          - 6.3625e+09      -     -    7s
+     0     0 6.3625e+09    0  203          - 6.3625e+09      -     -    7s
+     0     0 6.3625e+09    0  203          - 6.3625e+09      -     -    7s
+     0     0 6.3625e+09    0  204          - 6.3625e+09      -     -    8s
+     0     0 6.3625e+09    0  204          - 6.3625e+09      -     -    8s
+     0     0 6.3617e+09    0  200          - 6.3617e+09      -     -    9s
+     0     2 6.3617e+09    0  200          - 6.3617e+09      -     -   19s
+     1     4 6.2024e+09    1  197          - 6.2487e+09      -   9.0   20s
+     7    14 6.1957e+09    3  225          - 6.2024e+09      -  7365   28s
+    19    22 6.1953e+09    4  226          - 6.2014e+09      -  8516   30s
+    31    36 6.1953e+09    6  222          - 6.2014e+09      -  6042   45s
+    41    44 3.7896e+09    8  195          - 6.2014e+09      -  6814   52s
+    60    58 3.7877e+09    9  205          - 6.2009e+09      -  5770   56s
+    81    63 3.8645e+09   10  489          - 6.2009e+09      -  4623   70s
+    84    70 6.2009e+09   15  485          - 6.2009e+09      -  4600   76s
+   124   102 5.9948e+09   19  483          - 6.2009e+09      -  3320   80s
+   165   118 5.9809e+09   26  521          - 6.2009e+09      -  2640   90s
+   208   144 infeasible   30               - 6.2009e+09      -  2685   96s
+   229   146  postponed   30               - 6.2009e+09      -  2541  106s
+   277   169 3.1995e+09   32  624          - 6.2009e+09      -  2290  111s
+   344   236 3.1993e+09   38  616          - 6.2009e+09      -  2017  115s
+   421   266 infeasible   53               - 6.2009e+09      -  1845  121s
+   528   346 2.0817e+09   65  463          - 6.2009e+09      -  1617  126s
+   561   355 1.5800e+09   70  451          - 6.2009e+09      -  1758  134s
+   575   368 infeasible   71               - 6.2009e+09      -  1781  136s

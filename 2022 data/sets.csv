@@ -1,4 +1,6 @@
-Nodes,time periods in scenario ,Scenarios probabiblity,Time periods,VRES sources,Conventional sources,Producers 
-1,2,1,720,solar,biomass,1
-2,,,720,,,2
-3,,,,,,
+Nodes,cluster ,Scenarios probabiblity,Time periods,VRES sources,Conventional sources,Producers 
+1,1,0.4,6,solar,nuclear,1
+2,2,0.32,6,wind_onshore,coal,2
+3,3,0.28,6,wind_offshore,gas_cc,3
+4,,,6,,gas_oc,4
+5,,,,,biomass,5

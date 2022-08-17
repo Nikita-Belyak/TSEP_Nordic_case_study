@@ -1,0 +1,58 @@
+
+Gurobi 9.0.0 (mac64) logging started Wed Jul 20 14:55:37 2022
+
+
+Gurobi 9.0.0 (mac64) logging started Wed Jul 20 14:55:37 2022
+
+
+Gurobi 9.0.0 (mac64) logging started Wed Jul 20 14:55:38 2022
+
+Gurobi Optimizer version 9.0.0 build v9.0.0rc2 (mac64)
+Optimize a model with 11431 rows, 11430 columns and 41950 nonzeros
+Model fingerprint: 0x8eb1e19d
+Model has 70 quadratic objective terms
+Model has 2 quadratic constraints
+Coefficient statistics:
+  Matrix range     [1e-04, 5e+03]
+  QMatrix range    [1e-04, 2e+01]
+  QLMatrix range   [2e-02, 1e+06]
+  Objective range  [1e+01, 1e+04]
+  QObjective range [1e-04, 7e-02]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-02, 1e+06]
+  QRHS range       [1e-02, 1e-02]
+Presolve removed 1735 rows and 1200 columns
+
+Continuous model is non-convex -- solving as a MIP.
+
+Presolve removed 3287 rows and 2698 columns
+Presolve time: 0.11s
+Presolved: 11015 rows, 9503 columns, 42699 nonzeros
+Presolved model has 70 quadratic objective terms
+Presolved model has 1 quadratic constraint(s)
+Presolved model has 770 bilinear constraint(s)
+Variable types: 9503 continuous, 0 integer (0 binary)
+Presolve removed 2524 rows and 1270 columns
+Presolved: 8491 rows, 8233 columns, 33993 nonzeros
+Presolved model has 70 quadratic objective terms
+
+
+Root relaxation: objective 7.344663e+09, 11262 iterations, 0.38 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 7.3447e+09    0  252          - 7.3447e+09      -     -    0s
+     0     0 7.3447e+09    0  252          - 7.3447e+09      -     -    0s
+     0     2 7.3447e+09    0  252          - 7.3447e+09      -     -    1s
+
+Explored 3 nodes (22524 simplex iterations) in 2.33 seconds
+Thread count was 6 (of 12 available processors)
+
+Solution count 0
+No other solutions better than -1e+100
+
+Model is infeasible or unbounded
+Best objective -, best bound -, gap -
+
+User-callback calls 429, time in user-callback 0.00 sec

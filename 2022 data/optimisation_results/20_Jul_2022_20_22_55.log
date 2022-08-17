@@ -1,0 +1,100 @@
+
+Gurobi 9.5.0 (mac64[x86]) logging started Wed 20 Jul 20:22:55 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/20_Jul_2022_20_22_55.log"
+Set parameter Threads to value 6
+Set parameter MIPFocus to value 3
+
+Gurobi 9.5.0 (mac64[x86]) logging started Wed 20 Jul 20:23:02 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/20_Jul_2022_20_22_55.log"
+
+Gurobi 9.5.0 (mac64[x86]) logging started Wed 20 Jul 20:23:07 2022
+
+Set parameter LogFile to value "/Users/nikitabelyak/Dropbox (Aalto)/TSEP/Nordic_case_study/2022 data/optimisation_results/20_Jul_2022_20_22_55.log"
+Gurobi Optimizer version 9.5.0 build v9.5.0rc5 (mac64[x86])
+Thread count: 6 physical cores, 12 logical processors, using up to 6 threads
+Optimize a model with 32981 rows, 25625 columns and 98385 nonzeros
+Model fingerprint: 0x4f7edb1d
+Model has 70 quadratic objective terms
+Variable types: 14850 continuous, 10775 integer (10775 binary)
+Coefficient statistics:
+  Matrix range     [1e-04, 2e+22]
+  Objective range  [1e+01, 1e+04]
+  QObjective range [1e-04, 7e-02]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-02, 1e+21]
+Warning: Model contains large matrix coefficient range
+Warning: Model contains large rhs
+         Consider reformulating model or setting NumericFocus parameter
+         to avoid numerical issues.
+
+User MIP start did not produce a new incumbent solution
+User MIP start violates constraint R4369 by 6705.600000000
+
+Presolve removed 27123 rows and 22335 columns
+Presolve time: 0.05s
+Presolved: 5858 rows, 3290 columns, 17744 nonzeros
+Presolved model has 70 quadratic objective terms
+Variable types: 3290 continuous, 0 integer (0 binary)
+Root relaxation presolve time: 0.12s
+Root relaxation presolved: 5858 rows, 3290 columns, 17744 nonzeros
+Root relaxation presolved model has 70 quadratic objective terms
+Root barrier log...
+
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 1.026e+05
+ Factor NZ  : 1.785e+05 (roughly 5 MB of memory)
+ Factor Ops : 6.041e+06 (less than 1 second per iteration)
+ Threads    : 5
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -2.66058457e+12  2.63014262e+12  8.11e+05 4.41e+04  3.27e+09     0s
+   1  -1.95063091e+12  2.34538092e+12  5.98e+05 1.32e+04  2.76e+09     0s
+   2  -7.28024010e+11  1.70337921e+12  2.20e+05 4.85e+03  1.20e+09     0s
+   3  -1.16456411e+11  8.81557935e+11  2.96e+04 6.53e+02  2.19e+08     0s
+   4  -3.96399295e+10  5.32478563e+11  9.30e+03 2.05e+02  9.49e+07     0s
+   5  -1.16103789e+10  2.94248177e+11  2.06e+03 4.54e+01  3.68e+07     0s
+   6  -1.88531909e+09  1.08036991e+11  5.42e+02 1.19e+01  1.14e+07     0s
+   7   2.47097884e+09  6.33878996e+10  2.04e+02 4.49e+00  5.80e+06     0s
+   8   6.11471313e+09  2.06248536e+10  8.37e+00 1.84e-01  1.19e+06     0s
+   9   7.13623638e+09  8.55277267e+09  6.83e-01 1.50e-02  1.15e+05     0s
+  10   7.25767069e+09  7.63288385e+09  1.20e-01 2.64e-03  3.04e+04     0s
+  11   7.29051004e+09  7.39752195e+09  2.75e-02 6.05e-04  8.66e+03     0s
+  12   7.30638802e+09  7.38866826e+09  1.34e-02 2.95e-04  6.65e+03     0s
+  13   7.32127169e+09  7.36209118e+09  3.93e-03 8.67e-05  3.30e+03     0s
+  14   7.33751533e+09  7.34921172e+09  4.98e-04 1.10e-05  9.46e+02     0s
+  15   7.34139801e+09  7.34670823e+09  1.44e-04 3.18e-06  4.29e+02     0s
+  16   7.34357718e+09  7.34525072e+09  8.65e-10 8.73e-11  1.35e+02     0s
+  17   7.34457871e+09  7.34470776e+09  1.61e-09 5.82e-11  1.04e+01     0s
+  18   7.34466106e+09  7.34466353e+09  1.34e-09 5.82e-11  2.00e-01     0s
+  19   7.34466257e+09  7.34466273e+09  2.29e-09 5.82e-11  1.27e-02     0s
+  20   7.34466268e+09  7.34466268e+09  7.57e-10 5.82e-11  1.32e-05     0s
+  21   7.34466268e+09  7.34466268e+09  1.67e-10 5.82e-11  1.33e-08     0s
+  22   7.34466268e+09  7.34466268e+09  7.28e-12 5.82e-11  1.33e-11     0s
+
+Barrier solved model in 22 iterations and 0.19 seconds (0.15 work units)
+Optimal objective 7.34466268e+09
+
+
+Root relaxation: objective 7.344663e+09, 0 iterations, 0.08 seconds (0.08 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    7.344663e+09 7.3447e+09 -0.00%     -    0s
+
+Explored 1 nodes (0 simplex iterations) in 0.20 seconds (0.15 work units)
+Thread count was 6 (of 12 available processors)
+
+Solution count 1: 7.34466e+09 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (2.7918e+07) exceeds tolerance
+         (possibly due to large matrix coefficients)
+Best objective 7.344662677202e+09, best bound 7.344662677202e+09, gap 0.0000%
+
+User-callback calls 349, time in user-callback 0.00 sec
