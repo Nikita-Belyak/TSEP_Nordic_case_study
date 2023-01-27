@@ -68,7 +68,7 @@ Distance_lines = Matrix(DataFrame(CSV.File(data_src_link * "/transmission_lines/
 Lifetime_lines = Matrix(DataFrame(CSV.File(data_src_link * "/transmission_lines/" * "lines_lifetime.csv"))[!,:])
 
 # Investment costs (considering the expansion)
-I_lines = equivalent_annual_cost.(float.(Costs_lines .* Distance_lines .+ Converter_costs_lines), float.(Lifetime_lines)*6, interest_rate) 
+I_lines = equivalent_annual_cost.(float.(Costs_lines .* Distance_lines .+ Converter_costs_lines), float.(Lifetime_lines), interest_rate) 
 I_lines = replace(I_lines, NaN=>0)
 
 I_lines = round.(I_lines,digits = 4)
@@ -175,7 +175,7 @@ end
 
 # Annualised investment costs at each node for conventional units 
 I_conv= Array{Float64}(undef, N_nodes, N_I, N_E )
-I_conv = equivalent_annual_cost.(Investment_conv, Lifetime_conv*6, interest_rate) 
+I_conv = equivalent_annual_cost.(Investment_conv, Lifetime_conv, interest_rate) 
 
 I_conv = round.(I_conv, digits = 4)
 
@@ -260,7 +260,7 @@ end
 
 # Annualised investment costs at each node for VRES units 
 I_VRES= Array{Float64}(undef, N_nodes, N_I, N_R )
-I_VRES = equivalent_annual_cost.(Investment_VRES, Lifetime_VRES*6, interest_rate) 
+I_VRES = equivalent_annual_cost.(Investment_VRES, Lifetime_VRES, interest_rate) 
 #scalling 
 #I_VRES = I_VRES./scaling_factor
 

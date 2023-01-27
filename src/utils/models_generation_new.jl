@@ -32,9 +32,6 @@ function single_level_problem_generation(ip::initial_parameters)
     # Transmission capacity expansion realted variable
     @variable(single_level_problem, l_plus[ 1:ip.num_nodes, 1:ip.num_nodes]>=0)
 
-    #addition 
-    @variable(single_level_problem, 1 <= y[ 1:ip.num_nodes, 1:ip.num_nodes] <= 4, Int)
-
     # Conventional energy capacity expansion realted variable
     @variable(single_level_problem, g_conv_plus[ 1:ip.num_nodes, 1:ip.num_prod, 1:ip.num_conv]>=0)
 
@@ -106,10 +103,6 @@ function single_level_problem_generation(ip::initial_parameters)
                 + sum( f[s,t,n,m] for m in n+1:ip.num_nodes)/scaling_factor - sum(f[s,t,m,n] for m in 1:n-1)/scaling_factor #- sum( 0.98*f[s,t,m,n] for m in 1:n-1)
         == 0
     )
-
-    #addition 
-    @constraint(single_level_problem, [n in 1:ip.num_nodes, m in 1:ip.num_nodes ], l_plus[n,m] == 3000*(y[n,m]-1)) #
-
     
     # Transmission bounds 
     @constraint(single_level_problem, [s in 1:ip.num_scen, t in 1:ip.num_time_periods, n in 1:ip.num_nodes, m in 1:ip.num_nodes ],
@@ -455,7 +448,7 @@ end
 function lower_level_problem_generation_new(lines_investments_fixed::NTuple{10, Int64}, ip::initial_parameters, market::String)    
     # Defining single-level model
     lower_level_problem = Model(() -> Gurobi.Optimizer())
-    #set_optimizer_attribute(lower_level_problem, "Threads", 1)
+    set_optimizer_attribute(lower_level_problem, "Threads", 1)
     set_optimizer_attribute(lower_level_problem, "OutputFlag", 0)
 
     ## UPPER LEVEL VARIABLES

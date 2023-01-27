@@ -30,11 +30,11 @@ function print_output(src_link::String, ip::initial_parameters, ob_val::Float64,
     f = round.(f, digits = round_digits)
     
     if model == "single_level"
-        io = open(src_link*"/single_level_problem_output_"* string(Int(input_parameters.transm.budget_limit)) * "_budget_per_line_" * string(Int(input_parameters.conv.CO2_tax[1])) * "_tax_"* string(incentives[1]) * "_incentives_" * string(gen_budget[1]) * "_gen_exp_budget_com_1_" * string(gen_budget[2])* "_gen_exp_budget_com_2.txt","w")
+        io = open(src_link*"/single_level_problem_output_"* string((input_parameters.transm.budget_limit)) * "_budget_per_line_" * string((input_parameters.conv.CO2_tax[1])) * "_tax_"* string(incentives[1]) * "_incentives_" * string(gen_budget[1]) * "_gen_exp_budget_com_1_" * string(gen_budget[2])* "_gen_exp_budget_com_2.txt","w")
     elseif model == "bi_level_cournot"
-        io = open(src_link*"/bi_level_cournot_problem_output_" * string(Int(input_parameters.transm.budget_limit)) * "_budget_per_line_" * string(Int(input_parameters.conv.CO2_tax[1])) * "_tax_"* string(incentives[1]) * "_incentives_" * string(gen_budget[1]) * "_gen_exp_budget_com_1_" * string(gen_budget[2])* "_gen_exp_budget_com_2.txt" ,"w")
+        io = open(src_link*"/bi_level_cournot_problem_output_" * string((input_parameters.transm.budget_limit)) * "_budget_per_line_" * string((input_parameters.conv.CO2_tax[1])) * "_tax_"* string(incentives[1]) * "_incentives_" * string(gen_budget[1]) * "_gen_exp_budget_com_1_" * string(gen_budget[2])* "_gen_exp_budget_com_2.txt" ,"w")
     else 
-        io = open(src_link*"/bi_level_perfect_problem_output_" * string(Int(input_parameters.transm.budget_limit)) * "_budget_per_line_" * string(Int(input_parameters.conv.CO2_tax[1])) * "_tax_"* string(incentives[1]) * "_incentives_" * string(gen_budget[1]) * "_gen_exp_budget_com_1_" * string(gen_budget[2])* "_gen_exp_budget_com_2.txt" ,"w")
+        io = open(src_link*"/bi_level_perfect_problem_output_" * string((input_parameters.transm.budget_limit)) * "_budget_per_line_" * string((input_parameters.conv.CO2_tax[1])) * "_tax_"* string(incentives[1]) * "_incentives_" * string(gen_budget[1]) * "_gen_exp_budget_com_1_" * string(gen_budget[2])* "_gen_exp_budget_com_2.txt" ,"w")
     end
 
     println(io, "OBJECTIVE FUNCTION VALUE  $(ob_val*sf)")
@@ -323,7 +323,13 @@ function print_output(src_link::String, ip::initial_parameters, ob_val::Float64,
 
     close(io)
 
-    return ob_val, sum(vres_share[:].*ip.scen_prob), sum(total_consump[:].*ip.scen_prob)
+    total_conv_investment = Array{Float64}(1:ip.num_prod)
+    total_vres_investment = Array{Float64}(1:ip.num_prod)
+    for i = 1:ip.num_prod
+        total_conv_investment[i] = sum(ip.conv.investment_costs[n,i,r]*g_conv_plus[n,i,r] for n in 1:ip.num_nodes, r in 1:ip.num_conv)
+        total_vres_investment[i] = sum(ip.vres.investment_costs[n,i,r]*g_VRES_plus[n,i,r] for n in 1:ip.num_nodes, r in 1:ip.num_VRES)
+    end
+    return ob_val, sum(vres_share[:].*ip.scen_prob), sum(total_consump[:].*ip.scen_prob), total_conv_investment,  total_vres_investment
 end
 
 # function to calculate the duality gap for the lower-level problem
